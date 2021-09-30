@@ -7,7 +7,7 @@ payment as (
 ),
 
 order_payment as (
-    select 
+    select
         order_id,
         sum(case when status = 'success' then amount end) as amount
 
