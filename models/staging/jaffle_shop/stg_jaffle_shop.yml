@@ -2,17 +2,26 @@ version: 2
 
 models:
   - name: stg_customers
-    description: One unique customer per row
+    description: Staged customer data from our jaffle shop app.
     columns: 
       - name: customer_id
         description: Primary key for the stg_customers
         tests:
           - unique
           - not_null
+      - name: first_name
+        description: Customers first name
+      - name: last_name
+        description: Customers last name
 
   - name: stg_orders
     description: Staged order data from our jaffle shop app.
-    columns: 
+    columns:
+      - name: order_id
+        description: Primary key for orders.
+        tests:
+          - unique
+          - not_null
       - name: status
         description: '{{doc ("order_status")}}'
         tests:
@@ -24,10 +33,27 @@ models:
                 - placed
                 - return_pending
       - name: customer_id
+        description: Foreign key to stg.customers.customer_id
         tests: 
           - relationships:
               to: ref('stg_customers')
               field: customer_id
-               
+      - name: order_date
+        description: Order placed dates
+  - name: stg_payment
+    description: Staged payments data from jaffle shop app.
+    columns:
+      - name: payment_id
+        description: Primary key for stg-payment
+      - name: order_id
+        description: foreign key to stg_orders.order_id
+      - name: payment_method
+        description: Mode of payment
+      - name: status
+        description: '{{doc ("payment_status")}}'
+      - name: amount
+        description: Total amount paid in Dollars
+      - name: created_at
+        description: payment date
 
 
