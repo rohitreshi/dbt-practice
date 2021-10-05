@@ -1,4 +1,4 @@
-with orders as (
+
 
     select
         id as order_id,
@@ -6,8 +6,5 @@ with orders as (
         order_date,
         status
 
-    from raw.jaffle_shop.orders
+    from {{ source('jaffle_shop','orders')}}
 
-)
-
-SELECT *FROM orders
