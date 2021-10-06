@@ -12,7 +12,7 @@ sources:
         error_after: {count: 24, period: hour}
        description: Raw payments Data
        columns:
-         - name: payment_id
+         - name: id
            description: Primary key for payments
            tests:
             - not_null
